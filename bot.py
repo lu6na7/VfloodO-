@@ -74,8 +74,9 @@ async def cancel(update: Update, context: ContextTypes.DEFAULT_TYPE):
     return ConversationHandler.END
 
 
-def main():
-    app = ApplicationBuilder().token(TOKEN).build()
+async def main():
+    app = 
+ApplicationBuilder().token(TOKEN).build()
 
     conv = ConversationHandler(
         entry_points=[
@@ -105,8 +106,9 @@ def main():
 
     print("Бот запущен!")
 
-    app.run_polling()
+    await app.run_polling()
 
 
 if __name__ == "__main__":
-    main()
+    import asyncio
+    asyncio.run(main())
