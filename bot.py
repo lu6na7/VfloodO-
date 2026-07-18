@@ -67,17 +67,22 @@ async def finish(update: Update, context: ContextTypes.DEFAULT_TYPE):
     return ConversationHandler.END
 
 
-async def cancel(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.message.reply_text(
-        "❌ Заявка отменена."
-    )
-    return ConversationHandler.END
-    
-async def main():
+def main():
     app = ApplicationBuilder().token(TOKEN).build()
 
-    app.add_handler(CommandHandler("start", start))
-    app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, role))
+    conv = ConversationHandler(
+        entry_points=[CommandHandler("start", start)],
+        states={
+            ROLE: [MessageHandler(filters.TEXT & ~filters.COMMAND, role)],
+            AGE: [MessageHandler(filters.TEXT & ~filters.COMMAND, age)],
+            USERNAME: [MessageHandler(filters.TEXT & ~filters.COMMAND, finish)],
+        },
+        fallbacks=[CommandHandler("cancel", cancel)],
+    )
+
+    app.add_handler(conv)
+
+    print("Бот запущен!")
 
     app.run_polling()
 
