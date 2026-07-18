@@ -76,37 +76,11 @@ async def cancel(update: Update, context: ContextTypes.DEFAULT_TYPE):
 def main():
     app = ApplicationBuilder().token(TOKEN).build()
 
-    conv = ConversationHandler(
-        entry_points=[
-            CommandHandler("start", start)
-        ],
-
-        states={
-            ROLE: [
-                MessageHandler(filters.TEXT & ~filters.COMMAND, role)
-            ],
-
-            AGE: [
-                MessageHandler(filters.TEXT & ~filters.COMMAND, age)
-            ],
-
-            USERNAME: [
-                MessageHandler(filters.TEXT & ~filters.COMMAND, finish)
-            ],
-        },
-
-        fallbacks=[
-            CommandHandler("cancel", cancel)
-        ]
-    )
-
-    app.add_handler(conv)
-
-    print("Бот запущен!")
+    app.add_handler(CommandHandler("start", start))
+    app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, role))
 
     app.run_polling()
 
 
-if __name__ == "__main__":
-    import asyncio
-    asyncio.run(main())
+if name == "main":
+    main()
