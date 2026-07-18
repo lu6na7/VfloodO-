@@ -74,9 +74,8 @@ async def cancel(update: Update, context: ContextTypes.DEFAULT_TYPE):
     return ConversationHandler.END
 
 
-async def main():
-    app = 
-ApplicationBuilder().token(TOKEN).build()
+ def main():
+    app = ApplicationBuilder().token(TOKEN).build()
 
     conv = ConversationHandler(
         entry_points=[
@@ -106,7 +105,7 @@ ApplicationBuilder().token(TOKEN).build()
 
     print("Бот запущен!")
 
-    await app.run_polling()
+    app.run_polling()
 
 
 if __name__ == "__main__":
