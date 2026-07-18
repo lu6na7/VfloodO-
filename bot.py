@@ -66,7 +66,10 @@ async def finish(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     return ConversationHandler.END
 
-
+async def cancel(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    await update.message.reply_text("❌ Заявка отменена.")
+    return ConversationHandler.END
+    
 def main():
     app = ApplicationBuilder().token(TOKEN).build()
 
