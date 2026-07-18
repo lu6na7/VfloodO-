@@ -72,9 +72,8 @@ async def cancel(update: Update, context: ContextTypes.DEFAULT_TYPE):
         "❌ Заявка отменена."
     )
     return ConversationHandler.END
-
-
- def main():
+    
+def main():
     app = ApplicationBuilder().token(TOKEN).build()
 
     conv = ConversationHandler(
